@@ -112,5 +112,7 @@ Route::middleware(['only.admin'])->group(function () {
     Route::post('CreateStudent',[AdminController::class,'CreateStudent']);
     Route::get('SearchStudent',[AdminController::class,'SearchStudent']);
     Route::get('DeleteStudent/{id}',[AdminController::class,'DeleteStudent']);
+    Route::get('SelectEdit/{id}',[AdminController::class,'SelectStudent']);
+    Route::put('UpdateStudent/{id}',[AdminController::class,'EditStudent']);
    
 });

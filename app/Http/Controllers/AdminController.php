@@ -376,5 +376,99 @@ function GetStudents(){
 
 
 
+    function SelectStudent($id){
+        $SelectStudent = Students::find($id);
+        if($SelectStudent){
+            return view('Admin.EditStudent',['selectStudent'=>$SelectStudent]);
+        }
+    }
+
+
+
+    public function EditStudent(Request $request, $id)
+{
+    $validated = $request->validate([
+        'form_no' => 'required|string',
+        'reg_no' => 'required|string',
+        'date' => 'required|date',
+        'first_name' => 'required|string',
+        'last_name' => 'required|string',
+        'guardian_name' => 'required|string',
+        'dob' => 'required|date',
+        'age' => 'required|integer',
+        'cnic' => 'required|string',
+        'gender' => 'required|string',
+        'marital_status' => 'required|string',
+        'mobile' => 'required|string',
+        'documents' => 'required|string',
+        'terms' => 'required|string',
+        'signature' => 'nullable',
+        'courses' => 'required|array',
+    ]);
+
+    $selectedCourses = $request->courses;
+    $courseDetails = [];
+
+    foreach ($selectedCourses as $course) {
+        switch ($course) {
+            case 'CIT':
+                $timing = $request->cit_timing;
+                break;
+            case 'Graphic Designing':
+                $timing = $request->graphic_timing;
+                break;
+            case '3D Animation':
+                $timing = $request->animation_timing;
+                break;
+            case 'Digital Marketing':
+                $timing = $request->dm_timing;
+                break;
+            case 'Web Development':
+                $timing = $request->web_timing;
+                break;
+            case 'Mobile App Development':
+                $timing = $request->mobile_timing;
+                break;
+            case 'AC Repairing':
+                $timing = $request->ac_timing;
+                break;
+            default:
+                $timing = null;
+        }
+        $courseDetails[] = [
+            'course' => $course,
+            'timing' => $timing,
+        ];
+    }
+
+    $student = Students::findOrFail($id);
+    $student->form_no = $request->form_no;
+    $student->reg_no = $request->reg_no;
+    $student->date = $request->date;
+    $student->first_name = $request->first_name;
+    $student->last_name = $request->last_name;
+    $student->guardian_name = $request->guardian_name;
+    $student->dob = $request->dob;
+    $student->age = $request->age;
+    $student->cnic = $request->cnic;
+    $student->gender = $request->gender;
+    $student->marital_status = $request->marital_status;
+    $student->mobile = $request->mobile;
+    $student->home_contact = $request->home_contact;
+    $student->email = $request->email;
+    $student->address = $request->address;
+    $student->courses = json_encode($courseDetails);
+    $student->documents = $request->documents;
+    $student->terms = $request->terms;
+    $student->signature = $request->has('signature') ? true : false;
+
+    $student->save();
+
+    return redirect('/GetAllStudents')->with('success', 'Student updated successfully');
+}
+
+
+
+
 
 }

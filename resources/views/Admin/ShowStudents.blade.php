@@ -94,7 +94,7 @@
                                 <td class="p-2">{{ $student->created_at->format('Y-m-d') }}</td>
                                 <td class="p-2">
                                     <div class="flex flex-col sm:flex-row gap-2">
-                                        <a href="{{ url('EditStudent/' . $student->id) }}"
+                                        <a href="{{ url('SelectEdit/' . $student->id) }}"
                                             class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-xs text-center">
                                             Edit
                                         </a>
