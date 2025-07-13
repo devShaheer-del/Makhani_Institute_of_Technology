@@ -4,7 +4,10 @@
 
 @section('content')
     <div class="container mx-auto mt-8 p-6 bg-white rounded shadow">
-        <h1 class="text-3xl font-bold mb-6 text-indigo-700">All Students</h1>
+        <div class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+            <h1 class="text-3xl font-bold">All Enrolled Students</h1>
+            <p class="text-base mt-2">Manage and review All students' here.</p>
+        </div>
 
         @if (session('success'))
             <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
@@ -108,12 +111,19 @@
                             </tr>
                         @endforeach
                     </tbody>
+                    
                 </table>
             </div>
         @else
             <div class="bg-yellow-100 text-yellow-700 p-3 rounded">
                 No students found.
             </div>
+
         @endif
     </div>
+
+    <div class="mt-10 flex justify-center text-white">
+                        {{ $MyStudent->links() }}
+                    </div>
+
 @endsection

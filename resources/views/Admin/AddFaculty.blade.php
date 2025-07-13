@@ -6,7 +6,10 @@
  @section('content')
 
      <div class="max-w-4xl mx-auto px-6 py-10 bg-white rounded-2xl shadow-xl mt-10">
-         <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Add Faculty Member</h2>
+         <div class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+        <h1 class="text-3xl font-bold">Add Faculties Details</h1>
+        <p class="text-base mt-2">Manage and review Faculties'  here.</p>
+    </div>
 
          <form action="CreateFaculty" method="POST" enctype="multipart/form-data" class="space-y-6">
              @csrf

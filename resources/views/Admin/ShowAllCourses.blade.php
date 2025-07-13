@@ -4,7 +4,10 @@
 
 @section('content')
     <div class="max-w-6xl mx-auto px-4 py-8">
-        <h2 class="text-3xl font-bold text-indigo-700 mb-6 text-center">All Courses</h2>
+        <div class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+            <h1 class="text-3xl font-bold">Avalible Course</h1>
+            <p class="text-base mt-2">Manage and review Courses' here.</p>
+        </div>
 
         @if (session('success'))
             <div class="mb-4 p-4 bg-green-100 text-green-800 rounded-lg shadow">
@@ -50,6 +53,8 @@
                         </tr>
                     @endforelse
                 </tbody>
+
+                
             </table>
         </div>
     </div>
@@ -96,6 +101,10 @@
                 </div>
             </form>
         </div>
+
+        <div class="mt-10 flex justify-center text-white">
+                    {{ $courses->links() }}
+                </div>
     </div>
 
     <!-- Script -->
@@ -113,7 +122,7 @@
 
             document.getElementById('editModal').classList.remove('hidden');
             document.getElementById('editModal').classList.add('flex');
-            
+
         }
 
         function closeModal() {

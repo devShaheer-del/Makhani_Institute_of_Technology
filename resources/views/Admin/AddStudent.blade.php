@@ -11,7 +11,10 @@
     @endif
 
     <div class="max-w-4xl mx-auto p-6 bg-white shadow-2xl rounded-2xl mt-6">
-        <h1 class="text-3xl font-bold mb-6  text-indigo-700">Add Student</h1>
+        <div class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+        <h1 class="text-3xl font-bold">Create Students</h1>
+        <p class="text-base mt-2">Manage and review students' here.</p>
+    </div>
         <form action="CreateStudent" method="POST" class="space-y-6">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

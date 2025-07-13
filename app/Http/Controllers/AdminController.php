@@ -9,7 +9,14 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\course;
 use App\Models\faculty;
 use App\Models\Students;
+use App\Models\Enroll;
+use App\Models\Graduates;
+use App\Models\MediaVideo;
+use App\Models\MediaGallery;
+use App\Mail\VerificationMail;
+use App\Mail\RejectionMail;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
 class AdminController extends Controller
 {
     function CreateAdmin(Request $request){
@@ -57,7 +64,7 @@ class AdminController extends Controller
     session(['admin' => $admin]);
     
 
-    return redirect('/');
+    return redirect('/GetAllStudents');
     }
 
 
@@ -121,7 +128,7 @@ class AdminController extends Controller
     function GetCourses(){
 
 
-        $course = Course::all();
+        $course = Course::paginate(8);
        return view('Admin.ShowAllCourses', ['courses' => $course]);
 
     }
@@ -164,18 +171,16 @@ class AdminController extends Controller
 
     }
 
-    function GetFaculties(){
+    function GetFaculties() {
+    $faculties = faculty::paginate(8); // Show 6 faculty members per page
+    return view('Team', ['team' => $faculties]);
+}
 
-
-        $faculties = faculty::all();
-
-        return view('Team',['team'=> $faculties]);
-    }
 
 
 
     function GetFacultiesAdmin(){
-        $AdminFaculties = faculty::all();
+        $AdminFaculties = faculty::paginate(8);
         return view('Admin.ShowFaculties',['faculties'=>$AdminFaculties]);
     }
 
@@ -356,7 +361,7 @@ class AdminController extends Controller
 
 
 function GetStudents(){
-    $data = Students::all();
+    $data = Students::paginate(8);
 
 
     if($data){
@@ -468,7 +473,137 @@ function GetStudents(){
 }
 
 
+    function EnrollRequestofStudents(){
+
+        $final = Enroll::all();
+
+        if($final){
+
+            return view('Admin.EnrollRequest',['Enrolls' => $final]);
+        }
+
+    }
 
 
+    public function approve($id)
+{
+    $enroll = Enroll::findOrFail($id);
+    // $enroll->status = 'approved';
+    $enroll->save();
+
+    Mail::to($enroll->email)->send(new VerificationMail($enroll));
+
+    return redirect('/EnrollRequests')->with('success', 'Enrollment approved and verification email sent.');
+}
+
+public function reject($id)
+{
+    $enroll = Enroll::findOrFail($id);
+    // $enroll->status = 'rejected';
+    $enroll->save();
+
+    Mail::to($enroll->email)->send(new RejectionMail($enroll));
+
+    return redirect('/EnrollRequests')->with('error', 'Enrollment rejected and rejection email sent.');
+}
+
+
+
+    function UploadIamge(){
+        return view('Admin.UploadMediaImgae');
+    }
+    function UploadVideo(){
+        return view('Admin.UploadMediaVideo');
+    }
+
+
+    function UploadVideoNow(Request $request){
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'video' => 'required|mimes:mp4,avi,mov|max:204800' // max 200MB
+        ]);
+
+        $path = $request->file('video')->store('videos', 'public');
+
+        MediaVideo::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'path' => $path
+        ]);
+
+        return back()->with('success', 'Video uploaded successfully!');
+    }
+
+
+
+    function UploadImageNow(Request $request){
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+
+        $path = $request->file("image")->store('Media','public');
+
+        MediaGallery::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'path' => $path
+        ]);
+
+        return back()->with('success', 'Media uploaded successfully!');
+    }
+
+
+    function ShowImageContent(){
+        $Images = MediaGallery::all();
+
+
+        if($Images){
+            return view('Admin.ShowImages',['MyImages' => $Images]);
+        }
+    }
+
+
+    function DeleteContent($id) {
+    $DeleteImage = MediaGallery::destroy($id);
+
+    return redirect('/DisplayImagesAdmin')->with('success', 'Media deleted successfully.');
+    }
+
+
+
+    function AddGardutes(){
+        return view('Admin.Graduates');
+    }
+
+
+    public function CreateGraduates(Request $request)
+{
+    $validated = $request->validate([
+        'name' => 'required|string',
+        'father_name' => 'required|string',
+        'course' => 'required|string',
+        'graduation_date' => 'required|date',
+        'grade' => 'required|string',
+    ]);
+
+    $graduate = new Graduates;
+
+    $graduate->name = $validated['name'];
+    $graduate->father_name = $validated['father_name'];
+    $graduate->course = $validated['course'];
+    $graduate->graduation_date = $validated['graduation_date'];
+    $graduate->grade = $validated['grade'];
+
+    $graduate->save();
+
+    return redirect('/AddGardutes')->with('success', 'Graduate added successfully!');
+}
+
+
+    
 
 }

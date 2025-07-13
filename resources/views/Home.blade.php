@@ -12,13 +12,13 @@
             <!-- Text Content -->
             <div class="max-w-2xl">
                 <span>Mr.
-                  <strong>
-                      @if (session('user'))
-                        <span class="text-cyan-300">
-                            {{ session('user')['name'] }}
-                        </span><br>
-                    @endif
-                  </strong>
+                    <strong>
+                        @if (session('user'))
+                            <span class="text-cyan-300">
+                                {{ session('user')['name'] }}
+                            </span><br>
+                        @endif
+                    </strong>
                 </span>
                 <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
                     Welcome to <br>
@@ -41,9 +41,9 @@
                         class="bg-white text-blue-800 font-semibold px-6 py-3 rounded-full shadow-md hover:bg-cyan-200 transition duration-300">
                         Apply Now
                     </a>
-                    <a href="Offer"
+                    <a href="/Content"
                         class="bg-transparent border border-white px-6 py-3 rounded-full hover:bg-white hover:text-blue-800 transition duration-300">
-                        Explore Programs
+                        Media Content
                     </a>
                 </div>
             </div>
@@ -218,7 +218,8 @@
                 <!-- Special Course Card -->
                 <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
                     <div class="h-full p-6 rounded-lg border-2 border-yellow-500 flex flex-col relative overflow-hidden">
-                        <h2 class="text-sm tracking-widest title-font mb-1 font-medium text-yellow-500">Special Training
+                        <h2 class="text-sm tracking-widest title-font mb-1 font-medium text-yellow-500">Mobile Application
+                            Development
                         </h2>
                         <h1 class="text-5xl text-gray-900 leading-none pb-4 mb-4 border-b border-gray-200">75</h1>
                         <p class="text-gray-600 mb-6">Students trained under special mentorship programs.</p>

@@ -4,7 +4,10 @@
 @section('content')
 
     <div class="max-w-4xl mx-auto p-6 bg-white shadow-2xl rounded-2xl mt-6">
-        <h1 class="text-3xl font-bold mb-6  text-indigo-700">Edit Student</h1>
+        <div class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+        <h1 class="text-3xl font-bold">Edit Student Details</h1>
+        <p class="text-base mt-2">Update and review students' Detail here.</p>
+    </div>
         <form action="{{ url('UpdateStudent/' . $selectStudent->id) }}" method="POST" class="space-y-6">
             @csrf
             @method('PUT')

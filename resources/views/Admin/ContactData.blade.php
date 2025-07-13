@@ -4,7 +4,10 @@
 
 @section('content')
     <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-2xl font-semibold mb-4 text-indigo-700">Contact Submissions</h2>
+        <div class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+        <h1 class="text-3xl font-bold">Contact</h1>
+        <p class="text-base mt-2">Manage and review Contact'here.</p>
+    </div>
 
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-200 rounded-lg">

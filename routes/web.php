@@ -5,7 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EnrollController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -114,5 +114,20 @@ Route::middleware(['only.admin'])->group(function () {
     Route::get('DeleteStudent/{id}',[AdminController::class,'DeleteStudent']);
     Route::get('SelectEdit/{id}',[AdminController::class,'SelectStudent']);
     Route::put('UpdateStudent/{id}',[AdminController::class,'EditStudent']);
-   
+    Route::get('/EnrollRequests',[AdminController::class,'EnrollRequestofStudents']);
+    Route::post('ApproveEmail/{id}',[AdminController::class,'approve']);
+    Route::post('RejectEmail/{id}',[AdminController::class,'reject']);
+    Route::get('/UploadImage',[AdminController::class,'UploadIamge']);
+    Route::get('/UploadVideo',[AdminController::class,'UploadVideo']);
+    Route::post('UploadVideoNow',[AdminController::class,'UploadVideoNow']);
+    Route::post('UploadImageNow',[AdminController::class,'UploadImageNow']);
+    Route::get('/DisplayImagesAdmin',[AdminController::class,'ShowImageContent']);
+    Route::get('DeleteMedia/{id}',[AdminController::class,'DeleteContent']);
+    Route::get('/AddGardutes',[AdminController::class,'AddGardutes']);
+    Route::post('CreateGraduate',[AdminController::class,'CreateGraduates']);
 });
+
+
+
+
+Route::get('/Content',[HomeController::class,'ShowContent']);

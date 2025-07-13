@@ -18,7 +18,10 @@
             </div>
         @endif
         <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow">
-            <h2 class="text-2xl font-semibold text-indigo-700 mb-6">Add New Course</h2>
+            <div class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+        <h1 class="text-3xl font-bold">Create Courses</h1>
+        <p class="text-base mt-2">Manage and review Courses' here.</p>
+    </div>
 
             @if (session('success'))
                 <div class="mb-4 p-3 rounded bg-green-100 text-green-800">
