@@ -1,76 +1,78 @@
 @extends('Layout.Layout')
 
-
 @section('title', 'Offers')
 
-
-
 @section('content')
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({
+                duration: 1000,
+                once: false,
+                mirror: true
+            });
+        });
+    </script>
+
     <section class="bg-gradient-to-br from-blue-800 via-indigo-800 to-blue-900 text-white py-24">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-extrabold mb-6">What We Offer</h2>
-            <p class="text-white/80 text-lg max-w-3xl mx-auto mb-12">
+            <h2 class="text-4xl font-extrabold mb-6" data-aos="fade-down">What We Offer</h2>
+            <p class="text-white/80 text-lg max-w-3xl mx-auto mb-12" data-aos="fade-up">
                 Explore our industry-ready programs designed to boost your skills and launch your career. Each course is
                 delivered by expert mentors and backed by real-world projects.
             </p>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Course Card -->
-                @foreach ([
-            [
-                'title' => 'Web Development',
-                'desc' => 'Master front-end and back-end technologies to build full-stack web applications.',
-                'classes' => 48,
-                'duration' => '6 Months',
-                'fee' => 'PKR 40,000',
-            ],
-            [
-                'title' => 'Digital Marketing',
-                'desc' => 'Learn SEO, PPC, social media, email marketing, and analytics from experts.',
-                'classes' => 36,
-                'duration' => '4 Months',
-                'fee' => 'PKR 30,000',
-            ],
-            [
-                'title' => 'CIT (Computer Information Technology)',
-                'desc' => 'Comprehensive program covering basics of IT, MS Office, internet, and hardware.',
-                'classes' => 30,
-                'duration' => '3 Months',
-                'fee' => 'PKR 18,000',
-            ],
-            [
-                'title' => 'Graphics Designing',
-                'desc' => 'Create stunning designs using Photoshop, Illustrator, and Canva for print and digital.',
-                'classes' => 40,
-                'duration' => '4 Months',
-                'fee' => 'PKR 28,000',
-            ],
-            [
-                'title' => 'Mobile App Development',
-                'desc' => 'Build real-world Android and iOS apps using Flutter and Firebase.',
-                'classes' => 50,
-                'duration' => '6 Months',
-                'fee' => 'PKR 45,000',
-            ],
-            [
-                'title' => 'Freelancing & Upwork Training',
-                'desc' => 'Learn how to earn online, win clients, and scale your freelancing business.',
-                'classes' => 20,
-                'duration' => '1.5 Months',
-                'fee' => 'PKR 10,000',
-            ],
-        ] as $course)
-                    <div
-                        class="bg-white/10 p-6 rounded-2xl shadow-lg border border-white/10 hover:shadow-xl transition text-left">
-                        <h3 class="text-2xl font-semibold text-cyan-300 mb-2">{{ $course['title'] }}</h3>
-                        <p class="text-white/80 mb-4">{{ $course['desc'] }}</p>
-                        <ul class="text-white/70 space-y-1 text-sm">
-                            <li><strong>Total Classes:</strong> {{ $course['classes'] }}</li>
-                            <li><strong>Duration:</strong> {{ $course['duration'] }}</li>
-                            <li><strong>Course Fee:</strong> {{ $course['fee'] }}</li>
-                        </ul>
+                @forelse ($course as $index => $item)
+                    <div class="bg-gradient-to-br from-cyan-800 to-indigo-800 p-6 rounded-2xl shadow-xl border border-white/10 transition hover:scale-105 duration-300 text-left"
+                        data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-2xl font-bold text-cyan-300">{{ $item->name }}</h3>
+                            <span class="bg-white/20 text-sm text-white px-3 py-1 rounded-full">{{ $item->duration }}</span>
+                        </div>
+                        <p class="text-white/80 mb-5 text-sm leading-relaxed">
+                            {{ $item->description }}
+                        </p>
+
+                        <div class="space-y-3 text-white/90 text-sm">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cyan-400" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path
+                                        d="M4 3a1 1 0 000 2h12a1 1 0 100-2H4zM3 7a1 1 0 011-1h12a1 1 0 011 1v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7zm2 2v7h10V9H5z" />
+                                </svg>
+                                <span><strong>Classes:</strong> {{ $item->total_classes }}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cyan-400" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 9H9V6a1 1 0 112 0v5z" />
+                                </svg>
+                                <span><strong>Duration of Months:</strong> {{ $item->duration }}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cyan-400" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm.25-12.75a.75.75 0 01.75.75V9h1.5a.75.75 0 010 1.5H11v1a.75.75 0 01-1.5 0v-1H8a.75.75 0 010-1.5h1.5V6a.75.75 0 01.75-.75z" />
+                                </svg>
+                                <span><strong>Fee:</strong> {{ $item->fee }}</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <a href="#"
+                                class="inline-block px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded-lg shadow transition">
+                                Enroll Now
+                            </a>
+                        </div>
                     </div>
-                @endforeach
+                @empty
+                    <p class="text-white text-lg col-span-full" data-aos="fade-up">No courses available at the moment.</p>
+                @endforelse
             </div>
         </div>
     </section>

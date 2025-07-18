@@ -22,17 +22,13 @@ use App\Http\Controllers\HomeController;
 // });
 
 
-Route::get('/',function(){
-    return view('Home');
-});
+Route::get('/',[HomeController::class,'Home']);
 
 Route::get('/About',function(){
     return view('About');
 });
 
-Route::get('/Offer',function(){
-    return view('Offer');
-});
+Route::get('/Offer',[HomeController::class,'CourseOffer']);
 
 Route::get('/Team',[AdminController::class,'GetFaculties']);
 
@@ -125,6 +121,8 @@ Route::middleware(['only.admin'])->group(function () {
     Route::get('DeleteMedia/{id}',[AdminController::class,'DeleteContent']);
     Route::get('/AddGardutes',[AdminController::class,'AddGardutes']);
     Route::post('CreateGraduate',[AdminController::class,'CreateGraduates']);
+    Route::get('/ShowGraduates',[AdminController::class,'DisplayGraduates']);
+    Route::get('DeleteGraduates/{id}',[AdminController::class,'DeleteGraduates']);
 });
 
 

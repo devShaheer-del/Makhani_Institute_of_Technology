@@ -4,7 +4,10 @@
 
 @section('content')
 <div class="container mx-auto p-6">
-    <h1 class="text-3xl font-bold text-center text-blue-800 mb-6">Upload New Image</h1>
+    <div class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+            <h1 class="text-3xl font-bold">Media Content</h1>
+            <p class="text-base mt-2">Manage and review Media' here.</p>
+        </div>
 
     {{-- Success Message --}}
     @if(session('success'))

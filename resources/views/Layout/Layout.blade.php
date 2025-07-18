@@ -13,7 +13,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400..800&family=Baloo+Da+2:wght@400..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-        <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
 
 </head>
 <style>
@@ -53,6 +57,18 @@
 
 
     <x-footer />
+
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true
+        });
+    </script>
+
 </body>
 
 </html>

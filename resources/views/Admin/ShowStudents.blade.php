@@ -123,7 +123,7 @@
     </div>
 
     <div class="mt-10 flex justify-center text-white">
-                        {{ $MyStudent->links() }}
+                        {{-- {{ $MyStudent->links() }} --}}
                     </div>
 
 @endsection

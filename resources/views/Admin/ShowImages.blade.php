@@ -3,7 +3,10 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">Media Content</h1>
+    <div class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-2xl shadow-lg p-6 mb-8">
+            <h1 class="text-3xl font-bold">Media Content</h1>
+            <p class="text-base mt-2">Manage and review Media' here.</p>
+        </div>
 
     <div class="overflow-x-auto bg-white shadow-md rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">

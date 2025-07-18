@@ -604,6 +604,26 @@ public function reject($id)
 }
 
 
+
+    function DisplayGraduates(){
+        $graduates = Graduates::all();
+
+        if($graduates){
+            return view('Admin.ShowGraduates',['graduates' => $graduates]);
+        }
+    }
+
+
+
+    function DeleteGraduates($id){
+        $GraduatesDelete = Graduates::destroy($id);
+
+        if($GraduatesDelete){
+            return redirect('/ShowGraduates');
+        }
+    }
+
+
     
 
 }
