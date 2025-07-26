@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="mt-6">
-                            <a href="#"
+                            <a href="Enroll"
                                 class="inline-block px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium rounded-lg shadow transition">
                                 Enroll Now
                             </a>
