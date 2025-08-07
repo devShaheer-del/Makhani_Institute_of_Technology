@@ -21,7 +21,7 @@
                                 Hello <strong>{{ $enroll->name }}</strong>,
                             </p>
                             <p style="font-size: 16px; color: #111827;">
-                                We are pleased to inform you that your enrollment request for <strong>{{ $enroll->course }}</strong> has been <span style="color: #22c55e; font-weight:bold;">approved</span>.
+                                We are Invited you for meeting please visit our Institute about you admission structre and fee structre as well your enrollment request of <strong>{{ $enroll->course }}</strong> has been <span style="color: #22c55e; font-weight:bold;">approved</span>.
                             </p>
                             <p style="font-size: 16px; color: #111827;">
                                 Our team will contact you soon with further details. We look forward to having you on board!

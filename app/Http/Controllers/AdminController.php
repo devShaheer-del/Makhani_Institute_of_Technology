@@ -134,6 +134,8 @@ class AdminController extends Controller
     }
 
 
+
+
     function AddFaculty(){
         $GetCourse = Course::all();
         return view('Admin.AddFaculty',['courses'=>$GetCourse]);
@@ -249,6 +251,16 @@ class AdminController extends Controller
 
     return redirect('/AllFaculties')->with('success', 'Faculty updated successfully.');
     }
+
+
+    public function destroy($id)
+{
+    $faculty = Faculty::findOrFail($id);
+    $faculty->delete();
+
+    return redirect()->back()->with('success', 'Faculty deleted successfully!');
+}
+
 
     
 

@@ -45,15 +45,20 @@
                             <td class="px-6 py-4">{{ $faculty->course_id }}</td>
                             <td class="px-6 py-4">{{ $faculty->created_at->format('d M Y') }}</td>
                             <td class="px-6 py-4 text-center">
-                                <button class="text-blue-600 hover:underline font-medium mr-3"
-                                    onclick="OpenModal({{ $faculty }})">Edit</button>
-                                <form action="{{ url('/delete-faculty/' . $faculty->id) }}" method="POST"
+                                <button class="text-blue-600 hover:underline font-medium mr-3" data-id="{{ $faculty->id }}"
+                                    data-name="{{ $faculty->name }}" data-education="{{ $faculty->education }}"
+                                    data-age="{{ $faculty->age }}" data-specialty="{{ $faculty->specialty }}"
+                                    data-course="{{ $faculty->course_id }}" onclick="openEdit(this)">
+                                    Edit
+                                </button>
+                                <form action="{{ route('faculty.destroy', $faculty->id) }}" method="POST"
                                     class="inline-block"
                                     onsubmit="return confirm('Are you sure you want to delete this faculty?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:underline font-medium">Delete</button>
                                 </form>
+
                             </td>
                         </tr>
                     @empty
@@ -72,6 +77,60 @@
     </div>
 
     <!-- Faculty Edit Modal -->
-    <!-- [ ... Modal code remains unchanged ... ] -->
+    <div id="editModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md">
+            <h2 class="text-xl font-semibold mb-4">Edit Faculty</h2>
+            <form id="editForm" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" id="faculty_id" name="id">
 
+                <div class="mb-4">
+                    <label class="block font-medium mb-1">Name</label>
+                    <input type="text" id="faculty_name" name="name" class="w-full border px-3 py-2 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block font-medium mb-1">Education</label>
+                    <input type="text" id="faculty_education" name="education" class="w-full border px-3 py-2 rounded">
+                </div>
+                <div class="mb-4">
+                    <label class="block font-medium mb-1">Age</label>
+                    <input type="number" id="faculty_age" name="age" class="w-full border px-3 py-2 rounded">
+                </div>
+                <div class="mb-4">
+                    <label class="block font-medium mb-1">Specialty</label>
+                    <input type="text" id="faculty_specialty" name="specialty" class="w-full border px-3 py-2 rounded">
+                </div>
+                <div class="mb-4">
+                    <label class="block font-medium mb-1">Assigned Course</label>
+                    <input type="text" id="faculty_course" name="course_id" class="w-full border px-3 py-2 rounded">
+                </div>
+
+                <div class="flex justify-end gap-2">
+                    <button type="button" onclick="closeEdit()" class="bg-gray-300 px-4 py-2 rounded">Cancel</button>
+                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript for modal -->
+    <script>
+        function openEdit(button) {
+            document.getElementById('editModal').classList.remove('hidden');
+            document.getElementById('faculty_id').value = button.dataset.id;
+            document.getElementById('faculty_name').value = button.dataset.name;
+            document.getElementById('faculty_education').value = button.dataset.education;
+            document.getElementById('faculty_age').value = button.dataset.age;
+            document.getElementById('faculty_specialty').value = button.dataset.specialty;
+            document.getElementById('faculty_course').value = button.dataset.course;
+
+            // Update form action dynamically
+            document.getElementById('editForm').action = '/UpdateFaculties/' + button.dataset.id;
+        }
+
+        function closeEdit() {
+            document.getElementById('editModal').classList.add('hidden');
+        }
+    </script>
 @endsection

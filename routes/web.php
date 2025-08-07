@@ -123,6 +123,8 @@ Route::middleware(['only.admin'])->group(function () {
     Route::post('CreateGraduate',[AdminController::class,'CreateGraduates']);
     Route::get('/ShowGraduates',[AdminController::class,'DisplayGraduates']);
     Route::get('DeleteGraduates/{id}',[AdminController::class,'DeleteGraduates']);
+    Route::delete('/delete-faculty/{id}', [AdminController::class, 'destroy'])->name('faculty.destroy');
+
 });
 
 
