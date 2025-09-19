@@ -70,6 +70,19 @@ Route::post('Logout',[UsersController::class,'Logout']);
 Route::post('EnrollStudent',[EnrollController::class,'CreateEnroll']);
 
 
+// find student graduates
+
+
+
+Route::get('/GraduatesDetails',[UsersController::class,'findGraduates'])->name('GraduatesDetails');
+
+Route::get('/graduates/{course}', [UsersController::class, 'showCourseGraduates'])
+    ->name('graduates.byCourse');
+
+
+Route::get('/StudentProfile',[UsersController::class,'fetchStudentprofile']);
+
+Route::put('/StudentProfile/Update',[UsersController::class,'StudentUpdateProfile'])->name('student.update');
 
 // Admin routes
 
@@ -88,7 +101,6 @@ Route::middleware(['only.admin'])->group(function () {
     });
 
     Route::get('/GetAllStudents',[AdminController::class,'GetStudents']);
-
     
     Route::post('CreateAdmin',[AdminController::class,'CreateAdmin']);
     Route::post('AdminLogin',[AdminController::class,'AdminLogin']);

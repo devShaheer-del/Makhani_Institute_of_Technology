@@ -1,8 +1,10 @@
 @extends('Layout.Layout')
 
 @section('title', 'Signup | Makhani Institute of Technology')
-@section('meta_keywords', 'IT institute in Pakistan, Web Development, Graphic Designing, Mobile App Development, CIT, Digital Marketing, Makhani Institute')
-@section('meta_description', 'Join Makhani Institute of Technology – Pakistan’s leading private tech institute offering expert-led courses in Web Development, CIT, Graphic Design, and more.')
+@section('meta_keywords', 'IT institute in Pakistan, Web Development, Graphic Designing, Mobile App Development, CIT,
+    Digital Marketing, Makhani Institute')
+@section('meta_description', 'Join Makhani Institute of Technology – Pakistan’s leading private tech institute offering
+    expert-led courses in Web Development, CIT, Graphic Design, and more.')
 
 @section('content')
     @if (session('success'))
@@ -23,11 +25,12 @@
         </script>
     @endif
 
-    <section class="min-h-screen bg-gradient-to-br from-blue-800 via-indigo-800 to-blue-900 flex items-center justify-center px-4">
+    <section
+        class="min-h-screen bg-gradient-to-br from-blue-800 via-indigo-800 to-blue-900 flex items-center justify-center px-4">
         <div class="bg-white/10 backdrop-blur-md p-8 md:p-10 rounded-3xl shadow-2xl w-full max-w-md border border-white/20">
             <h2 class="text-3xl font-bold text-white mb-6 text-center">Create Your Account</h2>
 
-            <form action="UserRegisterd" method="POST" class="space-y-5">
+            <form action="UserRegisterd" method="POST" class="space-y-5" enctype="multipart/form-data">
                 @csrf
                 <!-- Name -->
                 <div>
@@ -47,6 +50,12 @@
                 <div>
                     <label class="block text-white/80 mb-1" for="password">Password</label>
                     <input type="password" name="password" id="password" required
+                        class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent">
+                </div>
+
+                <div>
+                    <label class="block text-white/80 mb-1" for="password">Profile Image</label>
+                    <input type="file" name="StudentPicture" required
                         class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent">
                 </div>
 

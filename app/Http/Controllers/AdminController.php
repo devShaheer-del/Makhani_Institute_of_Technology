@@ -12,6 +12,7 @@ use App\Models\Students;
 use App\Models\Enroll;
 use App\Models\Graduates;
 use App\Models\MediaVideo;
+use App\Models\users;
 use App\Models\MediaGallery;
 use App\Mail\VerificationMail;
 use App\Mail\RejectionMail;
@@ -595,25 +596,40 @@ public function reject($id)
     public function CreateGraduates(Request $request)
 {
     $validated = $request->validate([
-        'name' => 'required|string',
-        'father_name' => 'required|string',
-        'course' => 'required|string',
-        'graduation_date' => 'required|date',
-        'grade' => 'required|string',
+        'student_id'       => 'required|string',
+        'name'             => 'required|string',
+        'father_name'      => 'required|string',
+        'course'           => 'required|string',
+        'graduation_date'  => 'required|date',
+        'grade'            => 'required|string',
     ]);
 
-    $graduate = new Graduates;
+    // ✅ Check StudentID exists in users table
+    $user = \App\Models\Users::where('Personal_ID', $validated['student_id'])->first();
 
-    $graduate->name = $validated['name'];
-    $graduate->father_name = $validated['father_name'];
-    $graduate->course = $validated['course'];
+    if (!$user) {
+        return back()->withErrors(['student_id' => 'Invalid Student ID'])->withInput();
+    }
+
+    // ✅ Check if entered name matches user’s name
+    if ($user->name !== $validated['name']) {
+        return back()->withErrors(['name' => 'Name does not match with Student ID'])->withInput();
+    }
+
+    // ✅ Save graduate record
+    $graduate = new \App\Models\Graduates;
+    $graduate->StudentID       = $validated['student_id'];
+    $graduate->name            = $validated['name'];
+    $graduate->father_name     = $validated['father_name'];
+    $graduate->course          = $validated['course'];
     $graduate->graduation_date = $validated['graduation_date'];
-    $graduate->grade = $validated['grade'];
-
+    $graduate->grade           = $validated['grade'];
     $graduate->save();
 
     return redirect('/AddGardutes')->with('success', 'Graduate added successfully!');
 }
+
+
 
 
 
